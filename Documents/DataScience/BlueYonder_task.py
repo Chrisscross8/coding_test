@@ -26,7 +26,8 @@ def open_url(url):
     splitted_url = url.split('/')
     try:
         image = requests.get(url)
-        if image.headers['Content-type'] == 'image/jpeg' or image.headers['Content-type'] == 'image/png':
+        content_type = image.headers['Content-type']
+        if content_type.find('image') != -1:
             save_image(image,splitted_url[-1])
         else:
             print('The URL %s doesn\'t contain an jpg-image\n' % url)
